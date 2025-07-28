@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
 const reviewSchema = new mongoose.Schema({
-  Name:   { type: String },
-  Review: { type: String },
-  Rating: { type: Number },
+  name:   { type: String },
+  review: { type: String },
+  rating: { type: Number },
 });
 
 // Hot reload safe for Next.js dev server
