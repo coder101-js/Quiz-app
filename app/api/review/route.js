@@ -7,7 +7,7 @@ export async function POST(req) {
 
   try {
     const body = await req.json();
-    const { name, review: ReviewText } = body;
+    const { name:Name, review: ReviewText } = body;
 
     if (!Name || !ReviewText) {
       return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
