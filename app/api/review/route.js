@@ -13,7 +13,7 @@ export async function POST(req) {
       return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
     }
 
-    const newReview = new Review({ name, Review: ReviewText });
+    const newReview = new Review({ name, review: ReviewText });
     await newReview.save();
 
     return NextResponse.json({ message: '✅ Review submitted successfully!' }, { status: 200 });
@@ -22,7 +22,7 @@ export async function POST(req) {
     return NextResponse.json({ message: '❌ Server error.' }, { status: 500 });
   }
 }
-
+ 
 export async function GET() {
   await connectDB();
 
