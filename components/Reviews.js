@@ -109,7 +109,7 @@ const Reviews = () => {
         {/* Right: Submit Review */}
         <form
           onSubmit={handleSubmit}
-          className=" dark:bg-blue-900 p-6 rounded-xl shadow-md space-y-5 border"
+          className=" dark:bg-blue-800 p-6 rounded-xl shadow-md space-y-5 border"
         >
           <h3 className="text-2xl font-semibold text-blue-200 dark:text-white mb-4">Leave a Review ✍️</h3>
 
