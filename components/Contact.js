@@ -39,10 +39,10 @@ const Contact = () => {
 
       if (!res.ok) throw new Error(data.message || 'Failed to send message');
 
-      toast.success('✅ Message sent successfully!');
+      toast.success(' Message sent successfully!');
       setFormData({ Name: '', Email: '', Phone: '', Message: '' });
     } catch (err) {
-      toast.error('❌ Something went wrong. Try again!');
+      toast.error(' Something went wrong. Try again!');
       console.error(err);
     } finally {
       setLoading(false);
