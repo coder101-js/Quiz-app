@@ -69,7 +69,7 @@ const Navbar = () => {
       >
         {[
           { name: "About", href: "#about" },
-          { name: "Quiz", href: "/Quiz-App" },
+          { name: "Quiz", href: "/quiz" },
           { name: "Reviews", href: "#reviews" },
           { name: "Contact", href: "#contact" }
         ].map((item) => (

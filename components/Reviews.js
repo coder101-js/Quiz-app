@@ -12,15 +12,16 @@ const Reviews = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const apiBase = '/api'; 
+  const apiBase = '/api';
 
   const fetchReviews = async () => {
     try {
-      const response = await fetch(`${apiBase}/review`);
-      const data = await response.json();
+      const res = await fetch(`${apiBase}/review`);
+      const data = await res.json();
       setReviews(data);
-    } catch (error) {
-      console.error('Failed to fetch reviews:', error);
+    } catch (err) {
+      console.error('Fetch error:', err);
+      toast.error('Failed to load reviews');
     }
   };
 
@@ -39,60 +40,64 @@ const Reviews = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { name, review, rating } = formData;
 
-    if (!formData.name || !formData.review || formData.rating === 0) {
-      toast.error('Fill out all fields + give a rating ⭐');
+    if (!name.trim() || !review.trim() || rating === 0) {
+      toast.error('Please fill in all fields and give a rating ⭐');
       return;
     }
 
     try {
       setLoading(true);
-      const response = await fetch(`${apiBase}/review`, {
+      const res = await fetch(`${apiBase}/review`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: formData.name.trim(),
-          review: formData.review.trim(),
-          rating: formData.rating,
+          name: name.trim(),
+          review: review.trim(),
+          rating,
         }),
       });
 
-      const result = await response.json();
+      const result = await res.json();
 
-      if (response.ok) {
-        toast.success('Review submitted 🎉');
-        setFormData({ name: '', review: '', rating: 0 });
-        fetchReviews();
-      } else {
-        toast.error(result.message || 'Failed to submit review');
+      if (!res.ok) {
+        throw new Error(result.message || 'Error submitting review');
       }
-    } catch (error) {
-      console.error('Error:', error);
-      toast.error('Something went wrong');
+
+      toast.success('Review submitted 🎉');
+      setFormData({ name: '', review: '', rating: 0 });
+      fetchReviews();
+    } catch (err) {
+      console.error('Submit error:', err);
+      toast.error(err.message || 'Something went wrong');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-5xl mx-auto px-6 py-12">
       <Toaster position="top-center" />
-      <h2 className="text-3xl font-bold mb-6 text-center">User Reviews 💬</h2>
+      <h2 className="text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">User Reviews 💬</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* View Reviews */}
+        {/* Left: Display Reviews */}
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold">What people are saying 👇</h3>
+          <h3 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">What people are saying 👇</h3>
           {reviews.length === 0 ? (
-            <p className="text-gray-500">No reviews yet 😶 Be the first!</p>
+            <p className="text-gray-500 dark:text-gray-400">No reviews yet 😶 Be the first!</p>
           ) : (
             reviews.map((rev, i) => (
-              <div key={i} className="p-4 border rounded-lg shadow-sm bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="font-semibold">{rev.name}</span>
-                  <span className="text-yellow-400">
+              <div
+                key={i}
+                className="p-4 border rounded-lg shadow-sm bg-white dark:bg-gray-800 hover:shadow-md transition"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-semibold text-gray-900 dark:text-white">{rev.name || 'Anonymous'}</span>
+                  <span className="text-yellow-400 text-lg">
                     {'⭐'.repeat(rev.rating)}{' '}
-                    {'☆'.repeat(5 - rev.rating)}
+                    <span className="text-gray-300 dark:text-gray-700">{'☆'.repeat(5 - rev.rating)}</span>
                   </span>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300">{rev.review}</p>
@@ -101,18 +106,18 @@ const Reviews = () => {
           )}
         </div>
 
-        {/* Submit Review */}
+        {/* Right: Submit Review */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md space-y-4"
+          className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md space-y-5 border"
         >
-          <h3 className="text-2xl font-semibold mb-2 text-white">Leave a Review ✍️</h3>
+          <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Leave a Review ✍️</h3>
 
           <input
             type="text"
             name="name"
             placeholder="Your name"
-            className="w-full px-4 py-2 border rounded-md bg-gray-50 dark:bg-gray-800"
+            className="w-full px-4 py-2 border rounded-md bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             value={formData.name}
             onChange={handleChange}
           />
@@ -120,7 +125,7 @@ const Reviews = () => {
           <textarea
             name="review"
             placeholder="Write your thoughts..."
-            className="w-full px-4 py-2 border rounded-md bg-gray-50 dark:bg-gray-800"
+            className="w-full px-4 py-2 border rounded-md bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             rows="4"
             value={formData.review}
             onChange={handleChange}
@@ -132,10 +137,8 @@ const Reviews = () => {
                 key={num}
                 onClick={() => handleRating(num)}
                 className={`text-2xl cursor-pointer transition-transform duration-200 ${
-                  formData.rating >= num
-                    ? 'text-yellow-400 scale-110'
-                    : 'text-gray-300'
-                }`}
+                  formData.rating >= num ? 'text-yellow-400 scale-110' : 'text-gray-300'
+                } hover:scale-125`}
               >
                 ⭐
               </span>
@@ -145,7 +148,7 @@ const Reviews = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 bg-black text-white font-semibold rounded-md hover:bg-gray-800 transition disabled:opacity-50"
+            className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-md transition disabled:opacity-50"
           >
             {loading ? 'Submitting...' : 'Submit Review'}
           </button>
