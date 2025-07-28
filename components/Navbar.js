@@ -34,7 +34,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="/Quiz-App"
+              href="/quiz"
               className="hover:bg-blue-500 px-3 py-1 rounded-md transition"
 
             >
