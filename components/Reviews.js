@@ -79,19 +79,19 @@ const Reviews = () => {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
       <Toaster position="top-center" />
-      <h2 className="text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">User Reviews 💬</h2>
+      <h2 className="text-4xl font-bold mb-8 text-center text-black">User Reviews 💬</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Left: Display Reviews */}
         <div className="space-y-6">
-          <h3 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">What people are saying 👇</h3>
+          <h3 className="text-2xl font-semibold text-black">What people are saying 👇</h3>
           {reviews.length === 0 ? (
             <p className="text-gray-500 dark:text-gray-400">No reviews yet 😶 Be the first!</p>
           ) : (
             reviews.map((rev, i) => (
               <div
                 key={i}
-                className="p-4 border rounded-lg shadow-sm bg-white dark:bg-gray-800 hover:shadow-md transition"
+                className="p-4 border rounded-lg shadow-sm bg-blue hover:shadow-md transition"
               >
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-semibold text-gray-900 dark:text-white">{rev.name || 'Anonymous'}</span>
@@ -109,7 +109,7 @@ const Reviews = () => {
         {/* Right: Submit Review */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md space-y-5 border"
+          className=" dark:bg-blue-900 p-6 rounded-xl shadow-md space-y-5 border"
         >
           <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Leave a Review ✍️</h3>
 
