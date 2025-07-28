@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 
 const reviewSchema = new mongoose.Schema({
-  name:   { type: String },
-  review: { type: String },
-  rating: { type: Number },
+  name: { type: String, required: true },
+  review: { type: String, required: true },
+  rating: { type: Number, required: true, min: 1, max: 5 },
+}, {
+  timestamps: true, // gives you createdAt & updatedAt
 });
 
-// Hot reload safe for Next.js dev server
 export const Review = mongoose.models.Review || mongoose.model('Review', reviewSchema);

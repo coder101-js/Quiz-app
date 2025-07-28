@@ -93,12 +93,15 @@ const Reviews = () => {
                 key={i}
                 className="p-4 border rounded-lg shadow-sm bg-blue-100 hover:shadow-md transition"
               >
-                <div className="flex items-center justify-between mb-2 bg-blue-200 px-3 py-1 rounded">
-                  <span className="font-semibold text-gray-800">{rev.name || 'Anonymous'}</span>
-                  <span className="text-yellow-400 text-lg select-none">
-                    {'⭐'.repeat(rev.rating)}
-                    <span className="text-gray-300">{'☆'.repeat(5 - rev.rating)}</span>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-semibold text-gray-800">
+                    {rev.name || 'Anonymous'}
                   </span>
+                  <div className="flex items-center gap-1 text-yellow-400 text-lg select-none">
+                    {'⭐'.repeat(rev.rating)}
+                    {'☆'.repeat(5 - rev.rating)}
+                    <span className="ml-1 text-sm text-gray-600">{rev.rating}/5</span>
+                  </div>
                 </div>
                 <p className="text-gray-800">{rev.review}</p>
               </div>
@@ -143,6 +146,7 @@ const Reviews = () => {
                 ⭐
               </span>
             ))}
+            <span className="ml-2 text-sm text-gray-600">{formData.rating}/5</span>
           </div>
 
           <button
