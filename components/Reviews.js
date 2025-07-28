@@ -12,7 +12,7 @@ const Reviews = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const apiBase = 'https://api.buttnetworks.com'; // ✅ Your real API domain
+  const apiBase = '/api'; 
 
   const fetchReviews = async () => {
     try {

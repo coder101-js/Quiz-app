@@ -26,7 +26,7 @@ const page = () => {
             It can be used for learning, fun, or assessments. Our app provides instant feedback, results at the end,
             and a smooth experience across all devices.
           </p>
-          <Link href='/Quiz-App'>
+          <Link href='/quiz'>
             <button className='bg-blue-900 rounded-[5px] font-extrabold 
               w-[200px] h-10 mt-3 text-white hover:bg-blue-800 transition text-[20px]'>
               Get Quiz
