@@ -91,9 +91,9 @@ const Reviews = () => {
             reviews.map((rev, i) => (
               <div
                 key={i}
-                className="p-4 border rounded-lg shadow-sm bg-blue hover:shadow-md transition"
+                className="p-4 border rounded-lg shadow-sm bg-blue-700 hover:shadow-md transition"
               >
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-2 bg-blue-600">
                   <span className="font-semibold text-gray-900 dark:text-white">{rev.name || 'Anonymous'}</span>
                   <span className="text-yellow-400 text-lg">
                     {'⭐'.repeat(rev.rating)}{' '}
