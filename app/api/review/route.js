@@ -7,13 +7,13 @@ export async function POST(req) {
 
   try {
     const body = await req.json();
-    const { name:Name, review: ReviewText } = body;
+    const { name, review: ReviewText } = body;
 
-    if (!Name || !ReviewText) {
+    if (!name || !ReviewText) {
       return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
     }
 
-    const newReview = new Review({ Name, Review: ReviewText });
+    const newReview = new Review({ name, Review: ReviewText });
     await newReview.save();
 
     return NextResponse.json({ message: '✅ Review submitted successfully!' }, { status: 200 });
