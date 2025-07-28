@@ -111,7 +111,7 @@ const Reviews = () => {
           onSubmit={handleSubmit}
           className=" dark:bg-blue-900 p-6 rounded-xl shadow-md space-y-5 border"
         >
-          <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Leave a Review ✍️</h3>
+          <h3 className="text-2xl font-semibold text-blue-200 dark:text-white mb-4">Leave a Review ✍️</h3>
 
           <input
             type="text"
