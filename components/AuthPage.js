@@ -88,17 +88,29 @@ const AuthPage = () => {
       if (res.ok) {
         msgEl.textContent = "✅ " + data.message;
         msgEl.className = "text-green-500 text-sm text-center mt-2";
+
+
+        if (!isLogin) {
+          await fetch("/api/sendMail", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ to: email, name }),
+          });
+        }
+
         setTimeout(() => (window.location.href = "/home"), 2000);
       } else {
         msgEl.textContent = "❌ " + data.message;
         msgEl.className = "text-red-500 text-sm text-center mt-2";
       }
     } catch (error) {
+      console.error("Error:", error);
       msgEl.textContent = "❌ Request failed.";
       msgEl.className = "text-red-500 text-sm text-center mt-2";
     }
   };
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-blue-100 via-white to-purple-100 px-4">
