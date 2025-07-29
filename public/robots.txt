@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://quizapp.buttnetworks.com
+
+# Sitemaps
+Sitemap: https://quizapp.buttnetworks.com/sitemap.xml
