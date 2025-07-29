@@ -74,7 +74,7 @@ export async function POST(req) {
 
 
         await transporter.sendMail({
-            from: `"Your App" <${process.env.GMAIL_USER}>`,
+            from: `"Butt networks" <${process.env.GMAIL_USER}>`,
             to,
             subject,
             text,
