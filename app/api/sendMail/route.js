@@ -52,7 +52,7 @@ export async function POST(req) {
                     <tr>
                       <td align="center" style="padding: 20px;">
                         <a href="https://quizapp.buttnetworks.com/home" style="display: inline-block; padding: 14px 28px; background-color: #1d4ed8; color: #ffffff; font-size: 16px; font-weight: 600; border-radius: 8px; text-decoration: none;">
-                          🔗 Go to Dashboard
+                          🔗 Go to home
                         </a>
                       </td>
                     </tr>
