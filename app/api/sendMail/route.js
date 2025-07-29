@@ -1,11 +1,7 @@
 import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
-  console.log("📩 API HIT!", req.method); // Debug log
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Only POST requests allowed 🚫' });
-  }
 
   const { to, name } = req.body;
 
